@@ -82,21 +82,23 @@ if (localStorage.getItem("cart") === null) {
 data = localStorage.getItem("cart");
 data = JSON.parse(data);
 
+let container = document.querySelector(".container");
+container.innerHTML = ""; // Limpiar antes de agregar los productos
+
 data.forEach((element) => {
-  document.write(
-    `<div class="product">
-          <img src="https://picsum.photos/150?random=${element.id}" alt="Producto ${element.id}">
-          <div class="product-info">
-              <p>Producto ${element.name}</p>
-              <p>Precio: $${element.price}</p>
-          </div>
-          <div class="controlador-cantidades">
-              <button onclick="decreaseQuantity(this)" id="${element.id}">-</button>
-              <span>${element.quantity}</span>
-              <button onclick="increaseQuantity(this)" id="${element.id}">+</button>
-          </div>
-      </div>`
-  );
+  container.innerHTML += `
+    <div class="product">
+        <img src="${element.photo}" alt="Producto ${element.id}">
+        <div class="product-info">
+            <p>${element.name}</p>
+            <p>Precio: $${element.price}</p>
+        </div>
+        <div class="controlador-cantidades">
+            <button onclick="decreaseQuantity(this)" id="${element.id}">-</button>
+            <span>${element.quantity}</span>
+            <button onclick="increaseQuantity(this)" id="${element.id}">+</button>
+        </div>
+    </div>`;
 });
 
 function increaseQuantity(button) {
