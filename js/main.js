@@ -159,3 +159,34 @@ function totalize() {
   let cartSummary = document.querySelector(".cart-summary span");
   cartSummary.textContent = `Total: $${total}`;
 }
+
+function showModal() {
+  let data = JSON.parse(localStorage.getItem("cart")) || [];
+  let productDetails = document.getElementById("productDetails");
+  let modalTotal = document.getElementById("modalTotal");
+  productDetails.innerHTML = "";
+  let total = 0;
+
+  data.forEach((item) => {
+    if (item.quantity > 0) {
+      productDetails.innerHTML += `<p>${item.name} x${item.quantity} - $${
+        item.price * item.quantity
+      }</p>`;
+      total += item.price * item.quantity;
+    }
+  });
+
+  modalTotal.textContent = `$${total}`;
+  document.getElementById("myModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+function confirmPurchase() {
+  alert("Compra realizada con éxito!");
+  localStorage.removeItem("cart");
+  closeModal();
+  location.reload();
+}
