@@ -83,7 +83,7 @@ data = localStorage.getItem("cart");
 data = JSON.parse(data);
 
 let container = document.querySelector(".container");
-container.innerHTML = ""; // Limpiar antes de agregar los productos
+container.innerHTML = "";
 
 data.forEach((element) => {
   container.innerHTML += `
